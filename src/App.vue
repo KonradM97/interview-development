@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <div class="header">
-            <button @click="switchVisibility">{{ buttonName }}</button>
+            <button @click="switchVisibility">{{ isListVisible ? 'Schowaj listę pracowników' : 'Pokaż listę pracowników'}}</button>
         </div>
         <workers-list v-if="isListVisible" :workers-list="workers"/>
     </div>
@@ -31,7 +31,6 @@ export default class App extends Vue {
     }
     switchVisibility(){
         this.isListVisible = !this.isListVisible;
-        this.isListVisible? this.buttonName =  'Schowaj listę pracowników' : this.buttonName =  'Pokaż listę pracowników';
     }
     async createWorkers(){
         let factory = new WorkerListFactory();

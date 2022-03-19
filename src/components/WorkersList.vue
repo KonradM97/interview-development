@@ -1,28 +1,27 @@
 <template>
   <div class="workers-list">
-    Docelowa lista pracowników
-    <table>
-      <tbody>
-        <tr
-          v-for="worker in workersList"
-          :key="worker.id"
-          v-bind:style="[
-            worker._age == minAge
-              ? { background: '#0F0' }
-              : worker._age == maxAge
-              ? { background: '#FF0' }
-              : { background: '#FFF' },
-          ]"
-        >
-          <td>{{ worker._firstName }} {{ worker._lastName }}</td>
-          <td>{{ worker._age }}</td>
-          <td>{{ worker._salary }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <h2>Docelowa lista pracowników</h2>
+    <div
+      v-for="worker in workersList"
+      :key="worker.id"
+      :style="[
+        worker._age == minAge
+          ? { background: '#0F0' }
+          : worker._age == maxAge
+          ? { background: '#FF0' }
+          : { background: '#FFF' },
+      ]"
+      class="worker"
+    >
+      <div class="worker__dataField worker__name">{{ worker._firstName }} {{ worker._lastName }}</div>
+      <div class="worker__dataField worker__age">{{ worker._age }}</div>
+      <div class="worker__dataField worker__salary">{{ worker._salary }}</div>
+    </div>
+    <div class="workers-list__moreInfo">
     Średnia pensja: {{ averageSalary }} <br />
     Maksymalny wiek: {{ maxAge }}<br />
     Minimalny wiek: {{ minAge }}
+    </div>
   </div>
 </template>
 
@@ -35,15 +34,10 @@ export default class WorkersList extends Vue {
   @Prop({ type: Array, required: false, default: () => [] }) workersList;
   data() {
     return {
-      averageSalary: 0,
-      minAge: 0,
-      maxAge: 0,
+      averageSalary: this.getAverageSalary(),
+      minAge: this.getMinAge(),
+      maxAge: this.getMaxAge(),
     };
-  }
-  mounted() {
-    this.averageSalary = this.getAverageSalary();
-    this.minAge = this.getMinAge();
-    this.maxAge = this.getMaxAge();
   }
   /**
    *
@@ -81,10 +75,17 @@ export default class WorkersList extends Vue {
 </script>
 
 <style lang="scss" scoped>
+
 .workers-list {
   padding: 0.5rem;
 }
-td {
-  padding-right: 0.5rem;
+.worker {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: minmax(1fr, 100px);
+}
+.workers-list__moreInfo
+{
+  text-align: center;
 }
 </style>
