@@ -3,7 +3,17 @@
     Docelowa lista pracowników
     <table>
       <tbody>
-        <tr v-for="worker in workersList" :key="worker.id" v-bind:style="[worker._age == minAge ? {'background': '#0F0'}: worker._age == maxAge ? {'background': '#F00'}:{'background': '#FFF'}]">
+        <tr
+          v-for="worker in workersList"
+          :key="worker.id"
+          v-bind:style="[
+            worker._age == minAge
+              ? { background: '#0F0' }
+              : worker._age == maxAge
+              ? { background: '#F00' }
+              : { background: '#FFF' },
+          ]"
+        >
           <td>{{ worker._firstName }} {{ worker._lastName }}</td>
           <td>{{ worker._age }}</td>
           <td>{{ worker._salary }}</td>
@@ -27,7 +37,7 @@ export default class WorkersList extends Vue {
     return {
       averageSalary: 0,
       minAge: 0,
-      maxAge: 0
+      maxAge: 0,
     };
   }
   mounted() {
@@ -35,6 +45,10 @@ export default class WorkersList extends Vue {
     this.minAge = this.getMinAge();
     this.maxAge = this.getMaxAge();
   }
+  /**
+   *
+   * @returns {number}
+   */
   getAverageSalary() {
     let lenght = Object.keys(this.workersList).length;
     let sum = 0;
@@ -47,10 +61,18 @@ export default class WorkersList extends Vue {
       return 0;
     }
   }
+  /**
+   *
+   * @returns {number}
+   */
   getMinAge() {
     const ages = this.workersList.map((a) => a._age);
     return Math.min.apply(null, ages);
   }
+  /**
+   *
+   * @returns {number}
+   */
   getMaxAge() {
     const ages = this.workersList.map((a) => a._age);
     return Math.max.apply(null, ages);
