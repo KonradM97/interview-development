@@ -6,8 +6,8 @@
         <workers-list v-if="isListVisible" :workers-list="workers"/>
     </div>
 </template>
-
 <script>
+//opp
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import WorkersList from './components/WorkersList.vue';
