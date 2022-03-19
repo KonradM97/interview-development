@@ -10,7 +10,7 @@
             worker._age == minAge
               ? { background: '#0F0' }
               : worker._age == maxAge
-              ? { background: '#F00' }
+              ? { background: '#FF0' }
               : { background: '#FFF' },
           ]"
         >
